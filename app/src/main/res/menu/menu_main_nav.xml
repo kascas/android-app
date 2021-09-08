@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_main_nav_settings"
+            android:title="@string/nav_setting"
+            android:onClick="onClickSettings"/>
+        <item
+            android:id="@+id/menu_main_nav_signout"
+            android:title="@string/nav_signout"
+            android:onClick="onClickSignOut"/>
+    </group>
+</menu>

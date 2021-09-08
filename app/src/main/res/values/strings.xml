@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">android-app</string>
+    <string name="signup">signup</string>
+    <string name="signin">signin</string>
+    <string name="upload">upload</string>
+    <string name="download">download</string>
+    <string name="appName">android-app</string>
+    <string name="textSignUp">注册</string>
+    <string name="textSignIn">登录</string>
+    <string name="textName">用户名</string>
+    <string name="editName">输入用户名</string>
+    <string name="textPasswd">密码</string>
+    <string name="editPasswd">输入密码</string>
+    <string name="app_description">android-app</string>
+    <string name="nav_setting">设置</string>
+    <string name="nav_signout">退出登录</string>
+    <string name="nav_home">主页</string>
+    <string name="DefaultUser">User</string>
+    <string name="DefaultUserDesc">在线</string>
+</resources>
