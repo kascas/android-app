@@ -2,6 +2,7 @@ package util;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,41 +24,18 @@ import network.MyCallback;
 import retrofit2.Call;
 import services.GetRequest;
 
-public class ActivityUtils {
+public class ActivityUtils extends Application {
 
-    private static Handler tokenHandler;
+    private static Context context;
 
-    public static void setTokenHandler(Context context) {
-        tokenHandler = new Handler();
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                Runnable runnable1 = this;
-                GetRequest getRequest = HttpsManager.getRetrofit(context).create(GetRequest.class);
-                Call<RspModel<String>> resp = getRequest.refresh(HttpsManager.getRefreshToken());
-                resp.enqueue(new MyCallback<String>() {
-                    @Override
-                    protected void success(RespStatus respStatus, String token) {
-                        if (token != null) {
-                            HttpsManager.setAccessToken("Bearer " + token);
-                            Log.d("setTokenHandler-1", "AccessToken: " + HttpsManager.getAccessToken());
-                        } else {
-                            Log.d("setTokenHandler-2", respStatus.getMsg());
-                        }
-                    }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        context = getApplicationContext();
+    }
 
-                    @Override
-                    protected void failed(RespStatus respStatus, Call<RspModel<String>> call) {
-                        Intent intent = new Intent(context, SignInActivity.class);
-                        context.startActivity(intent);
-                        tokenHandler.removeCallbacks(runnable1);
-                        Log.d("setTokenHandler-3", respStatus.getMsg());
-                    }
-                });
-                tokenHandler.postDelayed(this, 1000 * 60);
-            }
-        };
-        tokenHandler.post(runnable);
+    public static Context getContext() {
+        return context;
     }
 
     /**

@@ -88,6 +88,9 @@ public class SignInActivity extends AppCompatActivity {
                     // 设置token
                     HttpsManager.setAccessToken("Bearer " + data.getAccessToken());
                     HttpsManager.setRefreshToken("Bearer " + data.getRefreshToken());
+                    // 启动Token刷新服务
+                    Intent serviceIntent = new Intent(SignInActivity.this, TokenService.class);
+                    startService(serviceIntent);
                     // 获取token后跳转到下一个Activity
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     intent.putExtra("user", user);

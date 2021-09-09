@@ -1,7 +1,5 @@
 package buaa.kascas;
 
-import static util.ActivityUtils.setTokenHandler;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.IntentFilter;
@@ -24,8 +22,6 @@ public class SettingsActivity extends AppCompatActivity {
         filter.addAction("android.intent.action.CLOSE_SETTINGS");
         filter.addAction("android.intent.action.CLOSE_ALL");
         registerReceiver(receiver, filter);
-
-        setTokenHandler(SettingsActivity.this);
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import models.structs.Token;
 import util.ActivityUtils;
 
 public class MainActivity extends AppCompatActivity implements Inputtips.InputtipsListener {
@@ -79,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements Inputtips.Inputti
         filter.addAction("android.intent.action.CLOSE_MAIN");
         filter.addAction("android.intent.action.CLOSE_ALL");
         registerReceiver(receiver, filter);
+
+        //启动Token刷新服务
+        Intent intent = new Intent(MainActivity.this, TokenService.class);
+        startService(intent);
 
         setDrawLayout();
         setListView();
@@ -236,24 +242,29 @@ public class MainActivity extends AppCompatActivity implements Inputtips.Inputti
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        Log.d("MainActivity", "onDestroy");
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
         mMapView.onDestroy();
         unregisterReceiver(receiver);
+        Intent intent = new Intent(MainActivity.this, TokenService.class);
+        stopService(intent);
+        super.onDestroy();
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
+        Log.d("MainActivity", "onDestroy");
         //在activity执行onResume时执行mMapView.onResume ()，重新绘制加载地图
         mMapView.onResume();
+        super.onResume();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
+        Log.d("MainActivity", "onPause");
         //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
         mMapView.onPause();
+        super.onPause();
     }
 
     @Override

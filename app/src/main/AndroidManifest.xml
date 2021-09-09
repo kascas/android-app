@@ -15,22 +15,26 @@
         android:roundIcon="@mipmap/ic_launcher_mine_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dpapp">
+        <service
+            android:name=".TokenService"
+            android:enabled="true"
+            android:exported="false" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="ec16d458f15298872bfb86392a51a5d2" />
 
         <activity
-            android:name="buaa.kascas.SettingsActivity"
+            android:name=".SettingsActivity"
             android:exported="true" />
         <activity
-            android:name="buaa.kascas.MainActivity"
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name="buaa.kascas.SignInActivity"
+            android:name=".SignInActivity"
             android:exported="true" />
         <activity
-            android:name="buaa.kascas.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
